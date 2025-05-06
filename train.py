@@ -12,7 +12,7 @@ from torch.nn.utils.rnn import pad_sequence
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load data
-data = load_data("data/train.json")
+
 
 q_vocab = Vocab.load("data/question_vocab.json")
 s_vocab = Vocab.load("data/query_vocab.json")
