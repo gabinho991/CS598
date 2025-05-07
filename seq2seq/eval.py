@@ -50,7 +50,10 @@ def run_eval(model, data_loader, vocab, sql_db=None, kg_file=None):
                 acc_lf += 1
             if is_structural_match(pred_tokens, gold_tokens):
                 acc_st += 1
-
+            print("\n--- Sample", i, "---")
+            print("Question:", ' '.join([inv_vocab[t.item()] for t in q_pad[i] if t.item() != vocab["<pad>"]]))
+            print("Gold   :", ' '.join(gold_tokens))
+            print("Pred   :", ' '.join(pred_tokens))
             # Execution accuracy
             gold_out, pred_out = None, None
             if sql_db:
