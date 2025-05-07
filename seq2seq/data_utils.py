@@ -13,15 +13,7 @@ def load_pairs_jsonl(path):
             raw_sql = data.get("sql_tok", [])
             
             # Clean SQL tokens
-            cleaned_sql = []
-            for token in raw_sql:
-                token = token.replace('"', '') # Remove quotes/backslashes
-                if token.startswith("^^<http"):  # preserve entire type annotation
-                    cleaned_sql.append(token)
-                else:
-                    # Token-split around SPARQL operators (while keeping them)
-                    parts = re.split(r'([()\{\}=<>])', token)
-                    cleaned_sql.extend([t for t in parts if t and not t.isspace()])
+            cleaned_sql = [t.replace('"', '') for t in raw_sql]
             
             pairs.append((question, cleaned_sql))
     return pairs
