@@ -1,9 +1,29 @@
+# MIMIC-SPARQL
+This repository provides our replicate project of mimic-sparql dataset implementation of the following paper: [Knowledge Graph-based Question Answering with Electronic Health Records](https://arxiv.org/abs/2010.09394) accepted at Machine Learning in Health Care (MLHC) 2021.
 
-# Seq2Seq Model for MIMIC Data
+## Datasets
+
+3. __MIMICSQL__  
+MIMICSQL consists of 5 merged table of MIMIC-III. Dataset and codes can be found in https://github.com/wangpinggl/TREQS
+4. __MIMIC-SPARQL__  
+MIMIC-SPARQL is a graph-based counterpart of MIMICSQL.
+3. __MIMICSQL*__  
+MIMICSQL* is extended version of MIMICSQL. The database consists of 9 table of MIMIC-III instead of 5 merged tables.  
+4. __MIMIC-SPARQL*__  
+MIMIC-SPARQL is a graph-based counterpart of MIMICSQL*. The knowledge graph of this dataset has 173,096 triples and the max hop is 5.
+
+### Prepare the Datasets
+
+First, you need to access the MIMIC-III data. This requires certification from https://mimic.physionet.org/ 
+And then, `mimic.db` is necessary to create MIMICSQL following the https://github.com/wangpinggl/TREQS README.md 
+We also provide script to create `mimic.db` through Bigquery, which require your google cloud project with access the MIMIC-III.
+The following process to create MIMICSQL* & MIMIC-SPARQL* can be find in https://github.com/junwoopark92/mimic-sparql/blob/master/README.md
+
+## Seq2Seq Model for MIMIC-SPARQL & MIMIC* Data
 
 This project trains a sequence-to-sequence (Seq2Seq) model with Luong attention on MIMIC-III data. The model is designed for tasks such as question answering or sequence prediction in the clinical domain.
 
-## 🔧 Hyperparameters
+### 🔧 Hyperparameters
 
 | Hyperparameter        | Value                    | Notes                                      |
 |-----------------------|--------------------------|--------------------------------------------|
