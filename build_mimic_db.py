@@ -6,7 +6,7 @@ import os
 
 PROJECT = "physionet-data"
 DATASET = "mimiciii_clinical"
-client = bigquery.Client(project="linear-freehold-354813")
+client = bigquery.Client(project="your-project-name") #enter your bigquery project with billing ability
 con = sqlite3.connect("mimic.db")
 
 def run_query(sql):
