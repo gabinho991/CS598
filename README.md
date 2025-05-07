@@ -1,26 +1,33 @@
-# CS598
 
-## 🧪 Experimental Setup
+# Seq2Seq Model for MIMIC Data
 
-### 📁 Dataset and Splits
-We use the MIMICSQL* and MIMIC-SPARQL* datasets derived from the MIMIC-III database. These datasets support structured QA in both SQL and SPARQL formats.
+This project trains a sequence-to-sequence (Seq2Seq) model with Luong attention on MIMIC-III data. The model is designed for tasks such as question answering or sequence prediction in the clinical domain.
 
-- **Training set**: 8,000 QA pairs  
-- **Validation set**: 1,000 QA pairs  
-- **Test set**: 1,000 QA pairs
+## 🔧 Hyperparameters
 
-### 🛠️ Preprocessing
-- Tokenization includes special symbols: `<pad>`, `<sos>`, `<eos>`
-- Lowercasing and punctuation normalization are applied
-- Structural accuracy metrics remove literals (e.g., numbers, strings)
-- SPARQL queries are automatically converted from SQL using schema-aware path finding
-- All SQL-SPARQL pairs are validated for semantic equivalence
+| Hyperparameter        | Value                    | Notes                                      |
+|-----------------------|--------------------------|--------------------------------------------|
+| Embedding size        | `256`                    | Used in both encoder and decoder           |
+| Hidden size           | `256`                    | BiLSTM encoder splits this across 2 dirs   |
+| Encoder dropout       | `0.3`                    | Applies to encoder LSTM                    |
+| Decoder dropout       | `0.3`                    | Applies to decoder LSTM                    |
+| Attention type        | `Luong`                  | Used in decoder                            |
+| Max decoding length   | `150`                    | During inference                           |
+| Learning rate         | `1e-3`                   | Adam optimizer                             |
+| Batch size            | `32` (default)           | Can be overridden via `--bs`               |
+| Epochs                | `20` (default)           | Can be overridden via `--epochs`           |
+| LR scheduler step     | `2`                      | Every 2 epochs                             |
+| LR scheduler gamma    | `0.8`                    | Multiplicative decay                       |
+| Gradient clipping     | `1.0`                    | Applied during training                    |
+| Scheduled sampling    | `0.9 * (0.95^(epoch-1))` | Lowered each epoch, min capped at 0.1      |
 
-### ⚙️ Implementation Details
-- Framework: PyTorch  
-- Optimizer: Adam with gradient clipping  
-- Evaluation: RDFlib (SPARQL), SQLite (SQL)  
-- Training device: NVIDIA TITAN Xp GPU  
-- Average training time: ~1 hour  
-- Teacher forcing with scheduled decay  
-- All code and data will be open-sourced after review
+## 🚀 Training
+
+Use the `train.py` script to train the model:
+
+```bash
+python train.py --train path/to/train.jsonl --dev path/to/dev.jsonl --epochs 20 --bs 32
+```
+
+Model and vocabulary will be saved automatically in the same directory as the training data.
+
