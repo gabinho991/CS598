@@ -10,7 +10,7 @@ MIMIC-SPARQL is a graph-based counterpart of MIMICSQL.
 3. __MIMICSQL*__  
 MIMICSQL* is extended version of MIMICSQL. The database consists of 9 table of MIMIC-III instead of 5 merged tables.  
 4. __MIMIC-SPARQL*__  
-MIMIC-SPARQL is a graph-based counterpart of MIMICSQL*. The knowledge graph of this dataset has 173,096 triples and the max hop is 5.
+MIMIC-SPARQL is a graph-based counterpart of MIMICSQL*. 
 
 ### Prepare the Datasets
 
