@@ -46,8 +46,13 @@ This project trains a sequence-to-sequence (Seq2Seq) model with Luong attention 
 Use the `train.py` script to train the model:
 
 ```bash
-python train.py --train path/to/train.jsonl --dev path/to/dev.jsonl --epochs 20 --bs 32
+python3 train.py --train path/to/train.jsonl --dev path/to/dev.jsonl --epochs 20 --bs 32
 ```
 
 Model and vocabulary will be saved automatically in the same directory as the training data.
 
+## 🚀 Evaluate
+Use the `eval.py` script to train the model:
+```bash
+Python3 eval.py --data path/to/natural/dev.json --vocab path/to/train_vocab.pkl --model path/to/best_model.pt
+ ```
